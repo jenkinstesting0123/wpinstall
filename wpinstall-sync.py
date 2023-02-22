@@ -33,7 +33,7 @@ def dataload(user_name, password, host_name, database_name, file_name):
             " --force --compress --init-command='SET SESSION sql_log_bin=0;'" + \
             database_name + " <"+file_name
         # os.system(cmd)
-        # print(cmd.decode('utf-8'))
+        print(cmd)
 
         # MessageTemplate.NotifyMessage('Succeed', 'To Sidious', 'Data uploaded successfully!', Constants.MAIL_RECIPIENTS_COMPLETE)
     except:
