@@ -6,8 +6,8 @@ pipeline {
         DEV_USER_NAME_PASS=credentials('DEV_USER_NAME_PASS')
         DEV_USER_NAME="${DEV_USER_NAME_PASS_USR}"
         DEV_PASSWORD="${DEV_USER_NAME_PASS_PSW}"
-        DEV_HOST_NAME=''
-        DEV_DATABASE_NAME=''
+        DEV_HOST_NAME='wpinstall.cv8szn5hkhmy.ap-south-1.rds.amazonaws.com'
+        DEV_DATABASE_NAME='wp_install'
         DEV_TABLE_NAME_BUS='full_usbus'
         DEV_TABLE_NAME_RES='full_usres'
         DEV_FILE_NAME_BUS='full_usbus.sql'
@@ -32,10 +32,7 @@ pipeline {
                     steps {
                       script {
                             try {
-                                echo 'hello'
-                                echo "The build number is ${env.DEV_PASSWORD}"
-                                echo "The build number is ${env.DEV_USER_NAME}"
-                                
+                                sh ' python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -t ${DEV_TABLE_NAME_BUS} -f ${DEV_FILE_NAME_BUS} --datadump'
                                 /*bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -t ${DEV_TABLE_NAME_BUS} -f ${DEV_FILE_NAME_BUS} --datadump""" */
                             }
                             catch(Exception e) {
