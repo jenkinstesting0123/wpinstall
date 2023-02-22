@@ -46,7 +46,7 @@ pipeline {
                     steps {
                         script {
                             try {
-                                echo 'hello'
+                                sh ' python3 hello.py'
                                 /*bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -t ${DEV_TABLE_NAME_RES} -f ${DEV_FILE_NAME_RES} --datadump""" */
                             }
                             catch(Exception e) {
@@ -63,13 +63,13 @@ pipeline {
             parallel {
                 stage('DataLoad_BUS') { 
                     steps {
-                        echo 'hello'
+                        sh ' python3 hello.py'
                         /*bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -f ${DEV_FILE_NAME_BUS} --loaddata"""*/
                     }
                 }
                 stage('DataLoad_RES') {
                     steps {
-                        echo 'hello'
+                        sh ' python3 hello.py'
                         /*bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME}  -f ${DEV_FILE_NAME_RES} --loaddata"""*/
                     }
                 }
@@ -79,7 +79,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        echo 'hello'
+                        sh ' python3 hello.py'
                        /*bat """del .sql"""*/
                     }
                     catch(Exception e) {
