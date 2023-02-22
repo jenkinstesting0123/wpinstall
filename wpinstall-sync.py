@@ -8,13 +8,18 @@ import getopt
 import getpass
 from time import gmtime, strftime
 
+MYSQLDUMP_PROCESS = 'mysqldump56 --force'
+MYSQL_PROCESS = 'mysql56 --force'
+
+SIDIOUS_PARAMS_DUMP = '-C --skip-secure-auth -u{0} -p{1} -h{2} {3} {4}'
+
 
 def datadump(user_name, password, host_name, database_name, table_name, file_name):
     try:
         # MessageTemplate.showMessageInConsole('From Sidious process')
         # MessageTemplate.showMessageInConsole('Downloading from SIDIOUS')
-        # cmd = mysqldump --login-path=dev-sidious --force production full_usbus > full_usbus.sql
-        cmd = 'mysqldump -u'+user_name+'–p'+password+' -h'+host_name+' '+database_name+' '+table_name+' >'+file_name
+        cmd = MYSQLDUMP_PROCESS + ' ' + SIDIOUS_PARAMS_DUMP.format(user_name, password, host_name, database_name, table_name) + ' > ' + file_name
+        #cmd = 'mysqldump -u'+user_name+'–p'+password+' -h'+host_name+' '+database_name+' '+table_name+' >'+file_name
         #cmd = 'mysqldump -uadmin -pWelcome123 -hwpinstall.cv8szn5hkhmy.ap-south-1.rds.amazonaws.com wp_install full_usbus >full_usbus.sql'
         #os.system(cmd)
         print(cmd)
