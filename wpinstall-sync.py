@@ -68,20 +68,8 @@ def main(argv):
         if opt in ('-f', '--file_name'):
             file_name=arg
         if opt in ('-g', '--getdata'):
-            print('gettingdata=========')
-            print(user_name)
-            print(password)
-            print(host_name)
-            print(database_name)
-            print(table_name)
-            print(file_name)
+            datadump(user_name, password, host_name, database_name, table_name, file_name)
         if opt in ('-l', '--loaddata'):
-            print('loadingdata=========')
-            print(user_name)
-            print(password)
-            print(host_name)
-            print(database_name)
-            print(table_name)
-            print(file_name)
+            dataload(user_name, password, host_name, database_name, file_name)
 if __name__ == '__main__':
     main(sys.argv[1:]) 
