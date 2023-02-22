@@ -1,5 +1,5 @@
 pipeline {
-    #agent { label 'dc15dcpprapp01' }
+    /*agent { label 'dc15dcpprapp01' } */
     environment {
         FAILURE_DISTRO = 'amir.khan@team.neustar'
         SUCCESS_DISTRO = 'amir.khan@team.neustar'
