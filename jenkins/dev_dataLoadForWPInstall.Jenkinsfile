@@ -34,6 +34,7 @@ pipeline {
                             try {
                                 echo 'hello'
                                 echo "The build number is ${env.DEV_PASSWORD}"
+                                echo "The build number is ${env.DEV_USER_NAME}"
                                 
                                 /*bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -t ${DEV_TABLE_NAME_BUS} -f ${DEV_FILE_NAME_BUS} --datadump""" */
                             }
