@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'dc15dcpprapp01' }
+    #agent { label 'dc15dcpprapp01' }
     environment {
         FAILURE_DISTRO = 'amir.khan@team.neustar'
         SUCCESS_DISTRO = 'amir.khan@team.neustar'
@@ -20,7 +20,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                 checkout([$class: 'GitSCM', branches: [[name: '*/dev-1677']], extensions: [], userRemoteConfigs: [[credentialsId: 'wp-ca-sync-repo', url: 'https://git.nexgen.neustar.biz/crdatacapture/devops/wp-ca-sync.git']]])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/jenkinstesting0123/wpinstall.git']])
+                 #checkout([$class: 'GitSCM', branches: [[name: '*/dev-1677']], extensions: [], userRemoteConfigs: [[credentialsId: 'wp-ca-sync-repo', url: 'https://git.nexgen.neustar.biz/crdatacapture/devops/wp-ca-sync.git']]])
                 }
             }
          // End of Checkout stage
@@ -30,7 +31,8 @@ pipeline {
                     steps {
                       script {
                             try {
-                                bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -t ${DEV_TABLE_NAME_BUS} -f ${DEV_FILE_NAME_BUS} --datadump"""
+                                ehco "Dump_full_usbus"
+                                #bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -t ${DEV_TABLE_NAME_BUS} -f ${DEV_FILE_NAME_BUS} --datadump"""
                             }
                             catch(Exception e) {
                                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE')
@@ -44,7 +46,8 @@ pipeline {
                     steps {
                         script {
                             try {
-                                bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -t ${DEV_TABLE_NAME_RES} -f ${DEV_FILE_NAME_RES} --datadump"""
+                                ehco "Dump_full_usbus"
+                                #bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -t ${DEV_TABLE_NAME_RES} -f ${DEV_FILE_NAME_RES} --datadump"""
                             }
                             catch(Exception e) {
                                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE')
@@ -60,12 +63,14 @@ pipeline {
             parallel {
                 stage('DataLoad_BUS') { 
                     steps {
-                        bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -f ${DEV_FILE_NAME_BUS} --loaddata"""
+                        ehco "Dump_full_usbus"
+                        #bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -f ${DEV_FILE_NAME_BUS} --loaddata"""
                     }
                 }
                 stage('DataLoad_RES') {
                     steps {
-                        bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME}  -f ${DEV_FILE_NAME_RES} --loaddata"""
+                        ehco "Dump_full_usbus"
+                        #bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME}  -f ${DEV_FILE_NAME_RES} --loaddata"""
                     }
                 }
             }
@@ -74,7 +79,8 @@ pipeline {
             steps {
                 script {
                     try {
-                        bat """del .sql"""
+                        ehco "Dump_full_usbus"
+                       #bat """del .sql"""
                     }
                     catch(Exception e) {
                         error('Error In stage RemovingSidiousWPCADUMP')
@@ -83,7 +89,7 @@ pipeline {
             }
         } 
     }
-    post {
+    /*post {
         success {
             mail body: "<b>CR Data Capture -- YPCRInstall Data Load</b><br>\\n\\<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", 
             charset: 'UTF-8', 
@@ -103,5 +109,5 @@ pipeline {
             subject: "FAILURE Data Load -> ${env.JOB_NAME}",
             to: "${FAILURE_DISTRO}"
         }         
-    }
+    } */
 }
