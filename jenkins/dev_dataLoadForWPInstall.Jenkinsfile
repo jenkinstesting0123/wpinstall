@@ -21,7 +21,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/jenkinstesting0123/wpinstall.git']])
-                 /*checkout([$class: 'GitSCM', branches: [[name: '*/dev-1677']], extensions: [], userRemoteConfigs: [[credentialsId: 'wp-ca-sync-repo', url: 'https://git.nexgen.neustar.biz/crdatacapture/devops/wp-ca-sync.git']]]) */
+                 
                 }
             }
          // End of Checkout stage
