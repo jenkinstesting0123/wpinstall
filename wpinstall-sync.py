@@ -8,7 +8,7 @@ import getopt
 import getpass
 from time import gmtime, strftime
 
-MYSQLDUMP_PROCESS = 'mysqldump56 --force'
+MYSQLDUMP_PROCESS = 'mysqldump'
 MYSQL_PROCESS = 'mysql56 --force'
 
 SIDIOUS_PARAMS_DUMP = '-C --skip-secure-auth -u{0} -p{1} -h{2} {3} {4}'
