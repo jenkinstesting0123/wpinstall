@@ -13,7 +13,6 @@ def datadump(user_name, password, host_name, database_name, table_name, file_nam
         #MessageTemplate.showMessageInConsole('Downloading from SIDIOUS')
         #cmd = mysqldump --login-path=dev-sidious --force production full_usbus > full_usbus.sql
         cmd = "mysqldump -u "+user_name+ " –p" +password+ " -h" +host_name+ " " +database_name+ " "+table_name+ " >" +file_name
-        print(cmd)
 	print(cmd.decode('utf-8'))
         #os.system(cmd.decode('utf-8'))
 
