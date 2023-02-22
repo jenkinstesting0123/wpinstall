@@ -13,8 +13,8 @@ def datadump(user_name, password, host_name, database_name, table_name, file_nam
         #MessageTemplate.showMessageInConsole('Downloading from SIDIOUS')
         #cmd = mysqldump --login-path=dev-sidious --force production full_usbus > full_usbus.sql
         cmd = "mysqldump -u "+user_name+ " –p" +password+ " -h" +host_name+ " " +database_name+ " "+table_name+ " >" +file_name
-	print(cmd.decode('utf-8'))
-        #os.system(cmd.decode('utf-8'))
+	#print(cmd.decode('utf-8'))
+        os.system(cmd)
 
         #MessageTemplate.NotifyMessage('Succeed', 'From Sidious', 'Data downloaded successfully!', Constants.MAIL_RECIPIENTS_COMPLETE)
     except:
@@ -30,7 +30,7 @@ def dataload(user_name, password, host_name, database_name, file_name):
         #cmd = mysql --login-path=data-loader-prdb01 --force --compress --init-command="SET SESSION sql_log_bin=0;" production < full_usbus.sql
         cmd = "mysql -u "+user_name+ " –p" +password+ " -h" +host_name+ " --force --compress --init-command='SET SESSION sql_log_bin=0;'"+database_name+ " <"+file_name      
         #os.system(cmd)
-	print(cmd.decode('utf-8'))
+	#print(cmd.decode('utf-8'))
 		
         #MessageTemplate.NotifyMessage('Succeed', 'To Sidious', 'Data uploaded successfully!', Constants.MAIL_RECIPIENTS_COMPLETE)
     except:
