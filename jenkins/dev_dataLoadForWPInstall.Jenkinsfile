@@ -4,8 +4,8 @@ pipeline {
         FAILURE_DISTRO = 'amir.khan@team.neustar'
         SUCCESS_DISTRO = 'amir.khan@team.neustar'
         DEV_USER_NAME_PASS=credentials('DEV_USER_NAME_PASS')
-        DEV_USER_NAME=${DEV_USER_NAME_PASS_USR}
-        DEV_PASSWORD=${DEV_USER_NAME_PASS_PSW}
+        DEV_USER_NAME="${DEV_USER_NAME_PASS_USR}"
+        DEV_PASSWORD="${DEV_USER_NAME_PASS_PSW}"
         DEV_HOST_NAME=''
         DEV_DATABASE_NAME=''
         DEV_TABLE_NAME_BUS='full_usbus'
