@@ -1,1 +1,1 @@
-# wpinstall
+# wpinstall-sync

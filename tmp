@@ -1,0 +1,57 @@
+@echo off
+
+REM echo Start Time: %date:~10,4%-%date:~4,2%-%date:~7,2%_%time:~0,8%
+
+rem Jenkins agent to use
+rem dc15dcpprapp01
+
+REM #########################################################################################
+REM DUMP PRODUCTION
+REM #########################################################################################
+
+REM run parallel
+mysqldump --login-path=prod-sidious --force production full_usbus > full_usbus.sql
+mysqldump --login-path=prod-sidious --force production full_usres > full_usres.sql
+
+REM #########################################################################################
+REM DUMP DEVELOPMENT
+REM #########################################################################################
+
+REM run parallel
+mysqldump --login-path=dev-sidious --force production full_usbus > full_usbus.sql
+mysqldump --login-path=dev-sidious --force production full_usres > full_usres.sql
+
+REM #########################################################################################
+REM DATA LOAD PRODUCTION
+REM #########################################################################################
+
+REM parallel
+REM PROD
+mysql --login-path=data-loader-prdb01 --force --compress --init-command="SET SESSION sql_log_bin=0;" production < full_usbus.sql
+mysql --login-path=data-loader-prdb02 --force --compress --init-command="SET SESSION sql_log_bin=0;" production < full_usbus.sql
+mysql --login-path=data-loader-prdb03 --force --compress --init-command="SET SESSION sql_log_bin=0;" production < full_usbus.sql
+
+REM Run parallel
+REM PROD
+mysql --login-path=data-loader-prdb01 --force --compress --init-command="SET SESSION sql_log_bin=0;" production < full_usres.sql
+mysql --login-path=data-loader-prdb02 --force --compress --init-command="SET SESSION sql_log_bin=0;" production < full_usres.sql
+mysql --login-path=data-loader-prdb03 --force --compress --init-command="SET SESSION sql_log_bin=0;" production < full_usres.sql
+
+REM #########################################################################################
+REM DATA LOAD DEVELOPMENT
+REM #########################################################################################
+
+REM Run parallel
+mysql --login-path=data-loader-dvdb01 --force --compress --init-command="SET SESSION sql_log_bin=0;" production < full_usbus.sql
+mysql --login-path=data-loader-dvdb01 --force --compress --init-command="SET SESSION sql_log_bin=0;" production < full_usres.sql
+
+del full_usbus.sql
+del full_usres.sql
+
+REM echo End Time: %date:~10,4%-%date:~4,2%-%date:~7,2%_%time:~0,8%
+
+REM pause
+
+
+
+mysqldump -u [user name] –p [password] -h [host name] [options] [database_name] [tablename] > [dumpfilename.sql]
