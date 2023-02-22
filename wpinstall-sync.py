@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: ascii -*-
 import mailSender
 import MessageTemplate
 import Constants
