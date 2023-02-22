@@ -62,8 +62,8 @@ def main(argv):
     
     if validateParams():
         try:
-            opts, args = getopt.getopt(sys.argv[1:], 'dluphdtf:', ['dumpdata', 'loaddata','user_name','password','host_name','database_name','table_name','file_name'])
-	    print(opts)
+          opts, args = getopt.getopt(sys.argv[1:], 'dluphdtf:', ['dumpdata', 'loaddata','user_name','password','host_name','database_name','table_name','file_name'])
+	  print(opts)
         except getopt.GetoptError:
             print('error in arguments')
         for opt, arg in opts:
