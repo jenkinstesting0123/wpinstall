@@ -31,7 +31,7 @@ pipeline {
                     steps {
                       script {
                             try {
-                                sh 'waht are yo ding'
+                                echo 'hello'
                                 /*bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -t ${DEV_TABLE_NAME_BUS} -f ${DEV_FILE_NAME_BUS} --datadump""" */
                             }
                             catch(Exception e) {
@@ -46,7 +46,7 @@ pipeline {
                     steps {
                         script {
                             try {
-                                sh 'waht are yo ding'
+                                echo 'hello'
                                 /*bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -t ${DEV_TABLE_NAME_RES} -f ${DEV_FILE_NAME_RES} --datadump""" */
                             }
                             catch(Exception e) {
@@ -63,13 +63,13 @@ pipeline {
             parallel {
                 stage('DataLoad_BUS') { 
                     steps {
-                        sh 'waht are yo ding'
+                        echo 'hello'
                         /*bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -f ${DEV_FILE_NAME_BUS} --loaddata"""*/
                     }
                 }
                 stage('DataLoad_RES') {
                     steps {
-                        ehco "Dump_full_usbus"
+                        echo 'hello'
                         /*bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME}  -f ${DEV_FILE_NAME_RES} --loaddata"""*/
                     }
                 }
@@ -79,7 +79,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh 'waht are yo ding'
+                        echo 'hello'
                        /*bat """del .sql"""*/
                     }
                     catch(Exception e) {
