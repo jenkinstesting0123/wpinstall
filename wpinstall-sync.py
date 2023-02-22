@@ -11,7 +11,7 @@ from time import gmtime, strftime
 MYSQLDUMP_PROCESS = 'mysqldump'
 MYSQL_PROCESS = 'mysql56 --force'
 
-SIDIOUS_PARAMS_DUMP = '-C --skip-secure-auth -u{0} -p{1} -h{2} {3} {4}'
+SIDIOUS_PARAMS_DUMP = '-u{0} -p{1} -h{2} {3} {4}'
 
 
 def datadump(user_name, password, host_name, database_name, table_name, file_name):
