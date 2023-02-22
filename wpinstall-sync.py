@@ -68,8 +68,7 @@ def main(argv):
         for opt, arg in opts:
             #MessageTemplate.showMessageInConsole('opt: {0} - arg: {1}'.format(opt, arg))
             if opt in ('-u', '--user_name'):
-                user_name=arg
-		print(user_name)
+                print(arg)
             elif opt in ('-p', '--password'):
                 password = arg
             elif opt in ('-h', '--host_name'):
