@@ -3,8 +3,9 @@ pipeline {
     environment {
         FAILURE_DISTRO = 'amir.khan@team.neustar'
         SUCCESS_DISTRO = 'amir.khan@team.neustar'
-        DEV_USER_NAME=''
-        DEV_PASSWORD=''
+        DEV_USER_NAME_PASS=credentials('DEV_USER_NAME_PASS')
+        DEV_USER_NAME=${DEV_USER_NAME_PASS_USR}
+        DEV_PASSWORD=${DEV_USER_NAME_PASS_PSW}
         DEV_HOST_NAME=''
         DEV_DATABASE_NAME=''
         DEV_TABLE_NAME_BUS='full_usbus'
@@ -32,6 +33,8 @@ pipeline {
                       script {
                             try {
                                 echo 'hello'
+                                sh '${DEV_USER_NAME}'
+                                sh '${DEV_PASSWORD}'
                                 /*bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -t ${DEV_TABLE_NAME_BUS} -f ${DEV_FILE_NAME_BUS} --datadump""" */
                             }
                             catch(Exception e) {
