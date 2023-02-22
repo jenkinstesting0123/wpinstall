@@ -21,7 +21,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/jenkinstesting0123/wpinstall.git']])
-                 #checkout([$class: 'GitSCM', branches: [[name: '*/dev-1677']], extensions: [], userRemoteConfigs: [[credentialsId: 'wp-ca-sync-repo', url: 'https://git.nexgen.neustar.biz/crdatacapture/devops/wp-ca-sync.git']]])
+                 /*checkout([$class: 'GitSCM', branches: [[name: '*/dev-1677']], extensions: [], userRemoteConfigs: [[credentialsId: 'wp-ca-sync-repo', url: 'https://git.nexgen.neustar.biz/crdatacapture/devops/wp-ca-sync.git']]]) */
                 }
             }
          // End of Checkout stage
@@ -32,7 +32,7 @@ pipeline {
                       script {
                             try {
                                 ehco "Dump_full_usbus"
-                                #bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -t ${DEV_TABLE_NAME_BUS} -f ${DEV_FILE_NAME_BUS} --datadump"""
+                                /*bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -t ${DEV_TABLE_NAME_BUS} -f ${DEV_FILE_NAME_BUS} --datadump""" */
                             }
                             catch(Exception e) {
                                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE')
@@ -47,7 +47,7 @@ pipeline {
                         script {
                             try {
                                 ehco "Dump_full_usbus"
-                                #bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -t ${DEV_TABLE_NAME_RES} -f ${DEV_FILE_NAME_RES} --datadump"""
+                                /*bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -t ${DEV_TABLE_NAME_RES} -f ${DEV_FILE_NAME_RES} --datadump""" */
                             }
                             catch(Exception e) {
                                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE')
@@ -64,13 +64,13 @@ pipeline {
                 stage('DataLoad_BUS') { 
                     steps {
                         ehco "Dump_full_usbus"
-                        #bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -f ${DEV_FILE_NAME_BUS} --loaddata"""
+                        /*bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME} -f ${DEV_FILE_NAME_BUS} --loaddata"""*/
                     }
                 }
                 stage('DataLoad_RES') {
                     steps {
                         ehco "Dump_full_usbus"
-                        #bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME}  -f ${DEV_FILE_NAME_RES} --loaddata"""
+                        /*bat """python wpinstall-sync.py -u ${DEV_USER_NAME} -p ${DEV_PASSWORD} -h ${DEV_HOST_NAME} -d ${DEV_DATABASE_NAME}  -f ${DEV_FILE_NAME_RES} --loaddata"""*/
                     }
                 }
             }
@@ -80,7 +80,7 @@ pipeline {
                 script {
                     try {
                         ehco "Dump_full_usbus"
-                       #bat """del .sql"""
+                       /*bat """del .sql"""*/
                     }
                     catch(Exception e) {
                         error('Error In stage RemovingSidiousWPCADUMP')
