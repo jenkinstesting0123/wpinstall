@@ -9,9 +9,10 @@ import getpass
 from time import gmtime, strftime
 
 MYSQLDUMP_PROCESS = 'mysqldump'
-MYSQL_PROCESS = 'mysql56 --force'
+MYSQL_PROCESS = 'mysql'
 
 SIDIOUS_PARAMS_DUMP = '-u{0} -p{1} -h{2} {3} {4}'
+SIDIOUS_PARAMS_IMPORT = '-u{0} -p{1} -h{2} {3}'
 
 
 def datadump(user_name, password, host_name, database_name, table_name, file_name):
@@ -19,8 +20,6 @@ def datadump(user_name, password, host_name, database_name, table_name, file_nam
         # MessageTemplate.showMessageInConsole('From Sidious process')
         # MessageTemplate.showMessageInConsole('Downloading from SIDIOUS')
         cmd = MYSQLDUMP_PROCESS + ' ' + SIDIOUS_PARAMS_DUMP.format(user_name, password, host_name, database_name, table_name) + ' > ' + file_name
-        #cmd = 'mysqldump -u'+user_name+'–p'+password+' -h'+host_name+' '+database_name+' '+table_name+' >'+file_name
-        #cmd = 'mysqldump -uadmin -pWelcome123 -hwpinstall.cv8szn5hkhmy.ap-south-1.rds.amazonaws.com wp_install full_usbus >full_usbus.sql'
         os.system(cmd)
         print(cmd)
         # MessageTemplate.NotifyMessage('Succeed', 'From Sidious', 'Data downloaded successfully!', Constants.MAIL_RECIPIENTS_COMPLETE)
@@ -35,10 +34,8 @@ def dataload(user_name, password, host_name, database_name, file_name):
         # MessageTemplate.showMessageInConsole('To Sidious process')
         # MessageTemplate.showMessageInConsole('Exporting from CR')
         # cmd = mysql --login-path=data-loader-prdb01 --force --compress --init-command="SET SESSION sql_log_bin=0;" production < full_usbus.sql
-        cmd = "mysql -u "+user_name + " –p" + password + " -h" + host_name + \
-            " --force --compress --init-command='SET SESSION sql_log_bin=0;'" + \
-            database_name + " <"+file_name
-        # os.system(cmd)
+        cmd = MYSQL_PROCESS + ' ' + SIDIOUS_PARAMS_IMPORT.format(user_name, password, host_name, database_name) + ' < ' + file_name
+        os.system(cmd)
         #print(cmd)
 
         # MessageTemplate.NotifyMessage('Succeed', 'To Sidious', 'Data uploaded successfully!', Constants.MAIL_RECIPIENTS_COMPLETE)
