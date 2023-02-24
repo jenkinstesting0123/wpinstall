@@ -41,14 +41,14 @@ def check_mysql_connectivity(user_name, password, host_name, database_name, port
 def validate_file_size(filename, max_size):
     # Check if file exists
     if not os.path.exists(filename):
-        print(f"File '{filename}' does not exist.")
+        print('File' +filename+ 'does not exist.')
         return False
 
     # Check if file size is less than or equal to max_size
     #
     file_size = os.path.getsize(filename)
     if file_size <= max_size:
-        print(f"File '{filename}' size does not have the maximum allowed size of {max_size} bytes.")
+        print('File'+filename+' size does not have the maximum allowed size of' +max_size+' bytes.')
         return False
 
     return True
@@ -64,7 +64,7 @@ def dump_mysql_table(host, user, password, db_name, table_name, dump_path):
         print(f"Table dump created successfully at {dump_path}")
         # dump_mysql_table(host="localhost", user="root", password="mypassword", db_name="mydatabase", table_name="mytable", dump_path="/path/to/table_dump.sql")
     except subprocess.CalledProcessError as e:
-        print(f"Failed to create table dump: {e}")
+        print('Failed to create table dump ',e)
         sys.exit(1) 
 
 
@@ -77,10 +77,10 @@ def load_mysql_dump(host, user, password, db_name, dump_path):
         with open(dump_path, "rb") as dump_file:
             subprocess.run(cmd, stdin=dump_file)
 
-        print(f"Dump file loaded successfully into database {db_name}")
+        print('Dump file loaded successfully into database',db_name)
         #load_mysql_dump(host="localhost", user="root", password="mypassword", db_name="mydatabase", dump_path="/path/to/dump.sql")
     except subprocess.CalledProcessError as e:
-        print(f"Failed to load dump file into database {db_name}: {e}")
+        print('Failed to load dump file into database '+db_name+': '+e+')
         sys.exit(1)
  
 
