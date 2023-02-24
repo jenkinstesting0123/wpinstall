@@ -35,7 +35,7 @@ def check_mysql_connectivity(user_name, password, host_name, database_name, port
             return True
 
     except mysql.connector.Error as error:
-        print(f'Failed to connect to MySQL database: {error}')
+        print("Failed to connect to MySQL database",error)
         return False
     
 def validate_file_size(filename, max_size):
